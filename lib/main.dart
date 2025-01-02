@@ -37,7 +37,7 @@ class _Myappstate extends State<MyApp> {
         'Extra': (BuildContext context) =>  OpcionesInterfaz(),
         'Home': (BuildContext context) =>  HomeScreen(),
         'Registro': (BuildContext context) => const RegistrationForm(),
-        'Agregar': (BuildContext context) => AgregarGasto(),
+        'Agregar': (BuildContext context) => AgregarGastos(),
       },
     );
   }

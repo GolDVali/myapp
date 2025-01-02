@@ -107,7 +107,7 @@ class IconosInferiores extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>  agregar.AgregarGasto()),
+                MaterialPageRoute(builder: (context) =>  agregar.AgregarGastos()),
               );
             },
           ),

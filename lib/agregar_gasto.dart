@@ -5,12 +5,12 @@ import 'package:myapp/graph.dart';
 import 'package:myapp/home_screen.dart';
 
 
-class AgregarGasto extends StatelessWidget {
+class AgregarGastos extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  AgregarGasto({super.key});
+  AgregarGastos({super.key});
 
   void _addExpense(String id, String name, double amount) async {
     try {
@@ -93,7 +93,7 @@ class IconosInferiores extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AgregarGasto()),
+                MaterialPageRoute(builder: (context) => AgregarGastos()),
               );
             },
           ),
