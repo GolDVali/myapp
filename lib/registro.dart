@@ -38,7 +38,6 @@ class RegistrationFormState extends State<RegistrationForm> {
   void _encryptContrasena() {
     final text = _passwordcontroller.text;
     final encrypted = _encrypter.encrypt(text, iv: _iv);
-
     ContrasenaEncriptado = encrypted.base64;
   }
 
@@ -76,7 +75,7 @@ class RegistrationFormState extends State<RegistrationForm> {
       appBar: AppBar(
         title: const Text('Registro de Usuario'),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -159,8 +158,7 @@ class RegistrationFormState extends State<RegistrationForm> {
                       print('Enviando...');
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => const Login()),
+                        MaterialPageRoute(builder: (context) => const Login()),
                       );
                     }
                   : null,

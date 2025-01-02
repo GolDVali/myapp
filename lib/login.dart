@@ -59,88 +59,87 @@ class _LoginScreenState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Logo de la app
-              const CircleAvatar(
-                radius: 60,
-                backgroundImage: AssetImage('lib/imagenes/michify.jpeg'),
-                backgroundColor: Colors.transparent,
-              ),
-              const SizedBox(height: 20),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 32.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(height: 60), // Espacio para asegurar que el contenido esté centrado
+            const CircleAvatar(
+              radius: 60,
+              backgroundImage: AssetImage('lib/imagenes/michify.jpeg'),
+              backgroundColor: Colors.transparent,
+            ),
+            const SizedBox(height: 20),
 
-              // Campo de "Correo"
-              TextField(
-                controller: _usernameController,
-                decoration: const InputDecoration(
-                  labelText: 'Correo',
-                  labelStyle: TextStyle(color: Colors.grey),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                    borderSide: BorderSide(color: Colors.blue),
-                  ),
+            // Campo de "Correo"
+            TextField(
+              controller: _usernameController,
+              decoration: const InputDecoration(
+                labelText: 'Correo',
+                labelStyle: TextStyle(color: Colors.grey),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                  borderSide: BorderSide(color: Colors.blue),
                 ),
               ),
-              const SizedBox(height: 15),
+            ),
+            const SizedBox(height: 15),
 
-              // Campo de "Contraseña"
-              TextField(
-                controller: _passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: 'Contraseña',
-                  labelStyle: TextStyle(color: Colors.grey),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                    borderSide: BorderSide(color: Colors.blue),
-                  ),
+            // Campo de "Contraseña"
+            TextField(
+              controller: _passwordController,
+              obscureText: true,
+              decoration: const InputDecoration(
+                labelText: 'Contraseña',
+                labelStyle: TextStyle(color: Colors.grey),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                  borderSide: BorderSide(color: Colors.blue),
                 ),
               ),
-              const SizedBox(height: 20),
+            ),
+            const SizedBox(height: 20),
 
-              // Botón de "Ingresar"
-              ElevatedButton(
-                onPressed: () {
-                  login();
-                },
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+            // Botón de "Ingresar"
+            ElevatedButton(
+              onPressed: () {
+                login();
+              },
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
                 ),
-                child: const Text(
-                  'Ingresar',
-                  style: TextStyle(fontSize: 16),
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
               ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, 'Registro');
-                },
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0)),
-                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                ),
-                child: const Text(
-                  'Registrar',
-                  style: TextStyle(fontSize: 16),
-                ),
+              child: const Text(
+                'Ingresar',
+                style: TextStyle(fontSize: 16),
               ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, 'Registro');
+              },
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0)),
+                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+              ),
+              child: const Text(
+                'Registrar',
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
+            const SizedBox(height: 20), // Espacio adicional para evitar desbordamiento
+          ],
         ),
       ),
     );
