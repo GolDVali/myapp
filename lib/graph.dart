@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:myapp/agregar_gasto.dart';
-import 'package:myapp/extra.dart';
+import 'package:myapp/agregar_gasto.dart' as agregar;
 import 'dart:math';
-
 import 'package:myapp/home_screen.dart';
+import 'package:myapp/extra.dart'; // Importa OpcionesInterfaz
 
 class GastosChart extends StatefulWidget {
   const GastosChart({super.key});
@@ -15,7 +14,6 @@ class GastosChart extends StatefulWidget {
 
 class _GastosChartState extends State<GastosChart> {
   final random = Random();
-  
   
   final List<Map<String, dynamic>> gastos = [
     {"categoria": "Alimentación", "cantidad": 0.0},
@@ -103,7 +101,7 @@ class IconosInferiores extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>  AgregarGasto()),
+                MaterialPageRoute(builder: (context) =>  agregar.AgregarGasto()),
               );
             },
           ),
@@ -126,6 +124,22 @@ class IconosInferiores extends StatelessWidget {
             },
           ),
         ],
+      ),
+    );
+  }
+}
+
+class AgregarGasto extends StatelessWidget {
+  const AgregarGasto({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Agregar Gasto'),
+      ),
+      body: const Center(
+        child: Text('Formulario para agregar un nuevo gasto'),
       ),
     );
   }

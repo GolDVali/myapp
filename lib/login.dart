@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -13,29 +13,42 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  final key = encrypt.Key.fromLength(32);
+  final _iv = encrypt.IV.fromLength(16);
+  final _encrypter = encrypt.Encrypter(encrypt.AES(encrypt.Key.fromLength(32)));
+
+  String _encrypt(String text) {
+    final encrypted = _encrypter.encrypt(text, iv: _iv);
+    return encrypted.base64;
+  }
+
   Future<void> login() async {
     try {
-      UserCredential credenciales = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: _usernameController.text,
-              password: _passwordController.text);
+      String encryptedEmail = _encrypt(_usernameController.text);
+      String encryptedPassword = _encrypt(_passwordController.text);
 
-      DocumentSnapshot userDoc = await FirebaseFirestore.instance
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
           .collection('Usuarios')
-          .doc(credenciales.user!.uid)
+          .where('correo', isEqualTo: encryptedEmail)
+          .where('password', isEqualTo: encryptedPassword)
           .get();
 
-      if (userDoc.exists) {
+      if (querySnapshot.docs.isNotEmpty) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) =>  HomeScreen()),
+          MaterialPageRoute(builder: (context) => HomeScreen()),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Usuario o contraseña incorrectos')),
         );
       }
-    } catch (e) {}
+    } catch (e) {
+      print('ERROR......$e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Ha ocurrido un error. Inténtelo de nuevo.')),
+      );
+    }
   }
 
   @override
@@ -51,17 +64,16 @@ class _LoginScreenState extends State<LoginScreen> {
               // Logo de la app
               const CircleAvatar(
                 radius: 60,
-                backgroundImage: AssetImage(
-                    'lib/imagenes/michify.jpeg'), 
+                backgroundImage: AssetImage('lib/imagenes/michify.jpeg'),
                 backgroundColor: Colors.transparent,
               ),
               const SizedBox(height: 20),
 
-              // Campo de "Nombre"
+              // Campo de "Correo"
               TextField(
                 controller: _usernameController,
                 decoration: const InputDecoration(
-                  labelText: 'Nombre',
+                  labelText: 'Correo',
                   labelStyle: TextStyle(color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(30.0)),
@@ -101,8 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                 ),
                 child: const Text(
                   'Ingresar',
@@ -112,16 +123,13 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-
                   Navigator.pushNamed(context, 'Registro');
                 },
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                  
+                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                 ),
                 child: const Text(
                   'Registrar',

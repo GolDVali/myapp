@@ -34,9 +34,10 @@ class _Myappstate extends State<MyApp> {
             return  HomeScreen();
           }
         },
-        'Extra': (BuildContext context) =>  const OpcionesInterfaz(),
-        'Agregar': (BuildContext context) =>  AgregarGasto(),
+        'Extra': (BuildContext context) =>  OpcionesInterfaz(),
+        'Home': (BuildContext context) =>  HomeScreen(),
         'Registro': (BuildContext context) => const RegistrationForm(),
+        'Agregar': (BuildContext context) => AgregarGasto(),
       },
     );
   }

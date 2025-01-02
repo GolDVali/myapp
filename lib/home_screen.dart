@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/agregar_gasto.dart';
-// Asegúrate de que el archivo de registro está importado correctamente
-// Importar Firebase Auth
-import 'package:myapp/extra.dart';
-import 'package:myapp/graph.dart';
-
-
+import 'package:myapp/agregar_gasto.dart' as agregar;
+import 'package:myapp/graph.dart' as graph;
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:myapp/extra.dart'; // Asegúrate de importar OpcionesInterfaz
 
 class HomeScreen extends StatelessWidget {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -97,7 +94,6 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-
 class IconosInferiores extends StatelessWidget {
   const IconosInferiores({super.key});
 
@@ -113,7 +109,7 @@ class IconosInferiores extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>  HomeScreen()),
+                MaterialPageRoute(builder: (context) => HomeScreen()),
               );
             },
           ),
@@ -122,7 +118,7 @@ class IconosInferiores extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AgregarGasto()),
+                MaterialPageRoute(builder: (context) =>  agregar.AgregarGasto()),
               );
             },
           ),
@@ -131,7 +127,7 @@ class IconosInferiores extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const GastosChart()),
+                MaterialPageRoute(builder: (context) => const graph.GastosChart()),
               );
             },
           ),

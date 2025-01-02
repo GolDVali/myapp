@@ -4,7 +4,6 @@ import 'package:myapp/extra.dart';
 import 'package:myapp/graph.dart';
 import 'package:myapp/home_screen.dart';
 
-int ID = 4;
 
 class AgregarGasto extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
@@ -14,10 +13,8 @@ class AgregarGasto extends StatelessWidget {
   AgregarGasto({super.key});
 
   void _addExpense(String id, String name, double amount) async {
-    String documento = "Gasto$ID";
-    ID++;
     try {
-      await _firestore.collection('Gastos').doc(documento).set({
+      await _firestore.collection('Gastos').doc().set({
         'nombre': name,
         'monto': amount,
         'fecha': FieldValue.serverTimestamp(),

@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/agregar_gasto.dart';
 import 'package:myapp/graph.dart';
 import 'package:myapp/home_screen.dart';
 import 'package:myapp/login.dart';
+// Importa la clase AgregarGasto
 
 
 class OpcionesInterfaz extends StatelessWidget {
@@ -74,7 +74,7 @@ class IconosInferiores extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>  AgregarGasto()),
+                MaterialPageRoute(builder: (context) => const AgregarGasto()),
               );
             },
           ),
@@ -97,6 +97,22 @@ class IconosInferiores extends StatelessWidget {
             },
           ),
         ],
+      ),
+    );
+  }
+}
+
+class AgregarGasto extends StatelessWidget {
+  const AgregarGasto({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Agregar Gasto'),
+      ),
+      body: const Center(
+        child: Text('Formulario para agregar un nuevo gasto'),
       ),
     );
   }
