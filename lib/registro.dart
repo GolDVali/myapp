@@ -160,7 +160,7 @@ class RegistrationFormState extends State<RegistrationForm> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const LoginScreen()),
+                            builder: (context) => const Login()),
                       );
                     }
                   : null,

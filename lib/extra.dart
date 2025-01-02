@@ -39,7 +39,7 @@ class OpcionesInterfaz extends StatelessWidget {
               FirebaseAuth.instance.signOut().then((value) {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  MaterialPageRoute(builder: (context) => const Login()),
                 );
               });
             },
